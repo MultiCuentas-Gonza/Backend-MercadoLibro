@@ -42,7 +42,7 @@ export async function insertLibro(isbn: string,
         obj_libro.fecha_ingreso = formatedDate(new Date())
     }
 
-    if (descuento > 0)
+    if (descuento >= 0 || descuento == null)
     {
         obj_libro.descuento = descuento;
     }
