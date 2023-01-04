@@ -4,7 +4,7 @@ import { BaseEntity,
         Column, 
         Entity, 
         JoinColumn, 
-        ManyToOne, 
+        ManyToOne,
         PrimaryColumn } from "typeorm"
 import { Libro } from "./Libro"
 import { Usuario } from "./Usuario"

@@ -12,6 +12,7 @@ import { CiudadResolver } from "./schema/Resolvers/Ciduad/CiudadResolver";
 import { PaisResolver } from "./schema/Resolvers/Pais/PaisResolver";
 import { ProvinciaResolver } from "./schema/Resolvers/Provincia/ProvinciaResolver";
 import { notificar } from "./notificar";
+import { EstadisticaResolver } from "./schema/Resolvers/Estadistica/EstadisticaResolver";
 
 const mercadopago = require("mercadopago")
 
@@ -30,7 +31,8 @@ export async function startServer() {
                       OrdenRsolver,
                       CiudadResolver,
                       PaisResolver, 
-                      ProvinciaResolver],
+                      ProvinciaResolver,
+                      EstadisticaResolver],
                       
         validate: false
         }),
