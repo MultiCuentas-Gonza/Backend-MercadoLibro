@@ -14,6 +14,7 @@ import { AppDataSource } from "../../Connection/Connection";
 import { Carrito } from "../../Entities/Carrito";
 import { message } from "../../NodeMailer/message";
 import { sendMail } from "../../NodeMailer/sendMail";
+import { getMessageHtml } from "../../NodeMailer/Plantilla_notificacion/notificacion";
 
 async function esNotificacionRepetida(paymentId: string) 
 {
@@ -61,7 +62,7 @@ export async function crearOrden(status: string, items: Array<any>, paymentId: s
     else if (usuario.carrito.items && usuario.carrito.items.length <= 0)
         throw new Error("EL USUARIO NO TIENE SU CARRITO VACIO");
 
-    let mensaje = message(usuario.correo, "", "")
+    let mensaje = message(usuario.correo, "", "", "")
 
     if (status == 'approved')
     {
@@ -148,11 +149,11 @@ export async function crearOrden(status: string, items: Array<any>, paymentId: s
 
             //NOTIFICAR VIA MAIL
             topic = 'COMPRA APROBADA'
-            textoMensaje = `Disfrute de su libros! 
+            textoMensaje = `Pago exitoso! que disfrute de sus libros 
                             ticket: ${paymentId}`
             mensaje.subject = topic
             mensaje.text = textoMensaje
-
+            mensaje.html = getMessageHtml(`Pago exitoso! que disfrute de sus libros `, paymentId)
             await sendMail(mensaje)
 
             orden = obj_orden
@@ -172,7 +173,8 @@ export async function crearOrden(status: string, items: Array<any>, paymentId: s
                             Por ende no se ha podido concretar por el momento, su ticket es: ${paymentId}`
             mensaje.subject = topic
             mensaje.text = textoMensaje
-
+            mensaje.html = getMessageHtml(`El estado del pago es pendiente. 
+                                            Por ende no se ha podido concretar por el momento`, paymentId)
             await sendMail(mensaje)
         }
     }
@@ -191,7 +193,8 @@ export async function crearOrden(status: string, items: Array<any>, paymentId: s
                             Por ende no se ha podido concretar, su ticket es: ${paymentId}`
             mensaje.subject = topic
             mensaje.text = textoMensaje
-
+            mensaje.html = getMessageHtml(`El pago de su compra fue rechazado. 
+                                            Por ende no se ha podido concretar`, paymentId)
             await sendMail(mensaje)
         }
     }
