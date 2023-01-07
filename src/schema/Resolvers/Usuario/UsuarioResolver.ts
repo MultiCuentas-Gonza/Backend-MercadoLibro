@@ -32,6 +32,7 @@ import { SendFavoritos } from "../../../SendTypes/SendFavoritos";
 import { GetFavoritos } from "../../Mutations/Usuario/getFavoritos";
 import { EliminarUsuario } from "../../Mutations/Usuario/eliminarUsuario";
 import { selectUpdateType } from "../../Mutations/Usuario/updateUsuario";
+import { RecuperarContrasenia } from "../../Mutations/Usuario/recuperarContrasenia";
 
 
 @Resolver()
@@ -47,6 +48,18 @@ export class UsuarioResolver
     async getFavoritos(@Arg('tokenUser') tokenUser: string)
     {
         return await GetFavoritos(tokenUser);
+    }
+
+    @Query(() => SendOpino)
+    async opino(@Args() {isbn, tokenUser}: ArgsOpinoOPuntuo)
+    {
+        return await Opino(isbn, tokenUser);
+    }
+
+    @Query(() => SendPuntuo)
+    async puntuo(@Args() {isbn, tokenUser}: ArgsOpinoOPuntuo)
+    {
+        return await Puntuo(isbn, tokenUser);
     }
 
     @Mutation(() => SendUsuario)
@@ -121,18 +134,6 @@ export class UsuarioResolver
         return await Puntuar(puntuacion, isbn, tokenUser);
     }
 
-    @Query(() => SendOpino)
-    async opino(@Args() {isbn, tokenUser}: ArgsOpinoOPuntuo)
-    {
-        return await Opino(isbn, tokenUser);
-    }
-
-    @Query(() => SendPuntuo)
-    async puntuo(@Args() {isbn, tokenUser}: ArgsOpinoOPuntuo)
-    {
-        return await Puntuo(isbn, tokenUser);
-    }
-
     @Mutation(() => Send)
     async eliminarNotificacion(@Arg('id') id: number)
     {
@@ -149,5 +150,11 @@ export class UsuarioResolver
     async updateUsuario(@Args() args: ArgsUpdateUsuario)
     {
         return await selectUpdateType(args)
+    }
+
+    @Mutation(() => Send)
+    async recuperarContrasenia(@Arg('correo') correo: string)
+    {
+        return await RecuperarContrasenia(correo)
     }
 }
