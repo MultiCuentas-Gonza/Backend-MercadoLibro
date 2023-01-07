@@ -5,6 +5,9 @@ import { ArgsType, Field, Float, Int } from "type-graphql";
 export class ArgsLogin 
 {
     @Field()
+    nombre: string = '';
+
+    @Field()
     correo: string = '';
 
     @Field()

@@ -1,8 +1,9 @@
 import { ILike } from "typeorm";
 import { Usuario } from "../../Entities/Usuario";
 
-export async function login(correo: string, contrasenia: string) 
+export async function login(correo: string, contrasenia: string)
 {
+
     const usuario = await Usuario.find({
         relations:
         {
@@ -29,11 +30,16 @@ export async function login(correo: string, contrasenia: string)
             },
             favorito: true
         },
-        where:
-        {
-            correo: ILike(`${correo}`),
-            contrasenia: contrasenia
-        },
+        where:[
+            {
+                correo: ILike(`${correo}`),
+                contrasenia: contrasenia
+            },
+            {
+                correo: ILike(`${correo}`),
+                contraseniaTemporal: contrasenia
+            }
+        ],
         order:{
             notificacion:{
                 id: "DESC"
