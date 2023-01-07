@@ -14,7 +14,7 @@ import { AppDataSource } from "../../Connection/Connection";
 import { Carrito } from "../../Entities/Carrito";
 import { message } from "../../NodeMailer/message";
 import { sendMail } from "../../NodeMailer/sendMail";
-import { getMessageHtml } from "../../NodeMailer/Plantilla_notificacion/notificacion";
+import { getMessageHtml } from "../../NodeMailer/Plantilla_notificacion/getMessageHtml";
 
 async function esNotificacionRepetida(paymentId: string) 
 {
