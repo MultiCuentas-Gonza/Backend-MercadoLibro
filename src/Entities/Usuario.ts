@@ -41,11 +41,20 @@ export class Usuario extends BaseEntity
     @Column()
     contrasenia!: string;
 
+    @Column({nullable: true})
+    contraseniaTemporal!: string;
+
     @Field()
     @Column({
         default: false
     })
     admin: boolean;
+
+    @Column({
+        nullable: true,
+        default: false
+    })
+    registroRedSocial: boolean;
 
     @Field(type => [Libro], {nullable: true})
     @ManyToMany((type) => Libro, {
