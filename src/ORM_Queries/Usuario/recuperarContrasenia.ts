@@ -14,7 +14,8 @@ async function enviarContraseniaPorMail(correo: string, contraseniaTemporal: str
 
     mensaje.subject = topic
     mensaje.text = textoMensaje
-    mensaje.html = getRecuperarContraseniaHtml(`Se ha generado una contraseña temporal de acceso, si usted no solicito el cambio de contraseña ignore este correo`, 
+    mensaje.html = getRecuperarContraseniaHtml(`Se ha generado una contraseña temporal de acceso, tiene tiempo hasta las 00:00 antes de que expire.
+                                                Si usted no solicito el cambio de contraseña ignore este correo.`, 
                                                 contraseniaTemporal)
                                     
     await sendMail(mensaje)
