@@ -14,8 +14,6 @@ import { ProvinciaResolver } from "./schema/Resolvers/Provincia/ProvinciaResolve
 import { notificar } from "./notificar";
 import { EstadisticaResolver } from "./schema/Resolvers/Estadistica/EstadisticaResolver";
 
-const mercadopago = require("mercadopago")
-
 export async function startServer() {
 
     const app = express();
@@ -44,8 +42,7 @@ export async function startServer() {
     app.post('/notificar', async (req: any, res: any) => {
         await notificar(req, res)
     })
-
-
+    
     server.applyMiddleware({ app, path: "/graphql" });
 
     return app;
