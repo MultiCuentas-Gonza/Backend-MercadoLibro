@@ -13,7 +13,7 @@ async function resetContraseniasTemporales() {
 
 export async function cronResetContraseniasTemporales()
 {
-    cron.schedule('0 0 * * * *', async () => {
+    cron.schedule('59 59 00 * * *', async () => {
         await resetContraseniasTemporales()
     })
 }
