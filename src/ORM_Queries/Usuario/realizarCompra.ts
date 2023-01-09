@@ -39,6 +39,7 @@ function getItems(usuario: Usuario): Array<any>
 
 async function crearLinkDePago(usuario: Usuario, items: any): Promise<string>
 {
+    const linkFrontEnd = 'https://mercado-libro.akianjs.net'
     mercadopago.configure({access_token: MERCADO_PAGO_TOKEN});
 
     const preference = {
@@ -48,9 +49,9 @@ async function crearLinkDePago(usuario: Usuario, items: any): Promise<string>
         },
         items: items,
         back_urls: {
-            success: 'https://mercado-libro.vercel.app/checkout/success',
-            failure: 'https://mercado-libro.vercel.app/checkout/failure',
-            pending: 'https://mercado-libro.vercel.app/checkout/pending',
+            success: `${linkFrontEnd}/checkout/success`,
+            failure: `${linkFrontEnd}/checkout/failure`,
+            pending: `${linkFrontEnd}/checkout/pending`,
         },
         auto_return: 'approved',
         notification_url: `${URL_NOTIFICACION}/notificar`,
